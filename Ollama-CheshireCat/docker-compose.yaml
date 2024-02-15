@@ -1,0 +1,104 @@
+version: '3.7'
+
+services:
+  cheshire-cat-core-1:
+    image: ghcr.io/cheshire-cat-ai/core:latest
+    container_name: cheshire_cat_core_1
+    depends_on:
+      - cheshire-cat-vector-memory
+      - ollama-1
+    environment:
+      - PYTHONUNBUFFERED=1
+      - WATCHFILES_FORCE_POLLING=true
+      - CORE_HOST=${CORE_HOST:-localhost}
+      - CORE_PORT=${CORE_PORT_1:-1865}
+      - QDRANT_HOST=${QDRANT_HOST:-cheshire_cat_vector_memory}
+      - QDRANT_PORT=${QDRANT_PORT:-6333}
+      - CORE_USE_SECURE_PROTOCOLS=${CORE_USE_SECURE_PROTOCOLS:-}
+      - API_KEY=${API_KEY:-}
+      - LOG_LEVEL=${LOG_LEVEL:-WARNING}
+      - DEBUG=${DEBUG:-true}
+      - SAVE_MEMORY_SNAPSHOTS=${SAVE_MEMORY_SNAPSHOTS:-false}
+    ports:
+      - ${CORE_PORT_1:-1865}:80
+    volumes:
+      - ./cat/static:/app/cat/static
+      - ./cat/public:/app/cat/public
+      - ./cat/plugins:/app/cat/plugins
+      - ./cat/metadata.json:/app/metadata.json
+    restart: unless-stopped
+
+  cheshire-cat-core-2:
+    image: ghcr.io/cheshire-cat-ai/core:latest
+    container_name: cheshire_cat_core_2
+    depends_on:
+      - cheshire-cat-vector-memory
+      - ollama-2
+    environment:
+      - PYTHONUNBUFFERED=1
+      - WATCHFILES_FORCE_POLLING=true
+      - CORE_HOST=${CORE_HOST:-localhost}
+      - CORE_PORT=${CORE_PORT_2:-1875}  # Different port for the second instance
+      - QDRANT_HOST=${QDRANT_HOST:-cheshire_cat_vector_memory}
+      - QDRANT_PORT=${QDRANT_PORT:-6333}
+      - CORE_USE_SECURE_PROTOCOLS=${CORE_USE_SECURE_PROTOCOLS:-}
+      - API_KEY=${API_KEY:-}
+      - LOG_LEVEL=${LOG_LEVEL:-WARNING}
+      - DEBUG=${DEBUG:-true}
+      - SAVE_MEMORY_SNAPSHOTS=${SAVE_MEMORY_SNAPSHOTS:-false}
+    ports:
+      - ${CORE_PORT_2:-1875}:80  # Different port for the second instance
+    volumes:
+      - ./cat/static:/app/cat/static
+      - ./cat/public:/app/cat/public
+      - ./cat/plugins:/app/cat/plugins
+      - ./cat/metadata.json:/app/metadata.json
+    restart: unless-stopped
+
+  cheshire-cat-vector-memory:
+    image: qdrant/qdrant:latest
+    container_name: cheshire_cat_vector_memory
+    expose:
+      - 6333
+    volumes:
+      - ./cat/long_term_memory/vector:/qdrant/storage
+    restart: unless-stopped
+
+  ollama-1:
+    container_name: ollama_cat_1
+    image: ollama/ollama:latest
+    volumes:
+      - ./ollama:/root/.ollama
+    expose:
+      - 11434
+    ports:
+      - "11434:11434"
+    environment:
+      - gpus=all
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  ollama-2:
+    container_name: ollama_cat_2
+    image: ollama/ollama:latest
+    volumes:
+      - ./ollama:/root/.ollama  # Same volume as the first instance
+    expose:
+      - 11435  # Different port for the second instance
+    ports:
+      - "11435:11435"  # Different port for the second instance
+    environment:
+      - gpus=all
+      - OLLAMA_HOST=0.0.0.0:11435
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
