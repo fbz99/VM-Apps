@@ -1,3 +1,25 @@
+# Docker Compose Files for Running Applications on a VM
+
+Welcome to the Docker Compose repository for running various applications on a Virtual Machine (VM). This repository contains Docker Compose files tailored to deploy instances of the Llama and Cheshire Cat applications, along with Portainer for managing containers on the VM. The applications are containerized using Docker for easier deployment and management.
+
+## Folder Structure
+
+- **Ollama-CheshireCat/**
+  - `docker-compose-multi.yaml`: Docker Compose file for deploying two instances each of Llama and Cheshire Cat with the same memory allocation.
+  - `docker-compose.yml`: Docker Compose file for deploying a single instance each of Llama and Cheshire Cat.
+- **Portainer/**
+  - `docker-compose.yml`: Docker Compose file for deploying Portainer to manage all containers on the VM.
+- **Scripts/**
+  - `deploy.sh`: Shell script for deploying containers. Use `-m` flag for multi-instance Cheshire Cat and `-s` flag for a single instance.
+  - `stop.sh`: Shell script for stopping all containers except for Portainer.
+
+## Usage
+
+### Prerequisites
+
+- Docker installed on your VM.
+- Docker Compose installed on your VM.
+
 ### Instructions
 
 1. Clone this repository to your VM:
@@ -40,6 +62,7 @@
 
 Alternatively, you can use the provided shell scripts to deploy and stop containers:
 
+
 - **Add Permissions**
     - Enter the /Scripts folder and use chmod:
         ```bash
@@ -74,4 +97,22 @@ Alternatively, you can use the provided shell scripts to deploy and stop contain
         ```
 
 These scripts automate the process of deploying and stopping containers, providing an easier and quicker way to manage your applications on the VM.
+
+## References
+
+- [Ollama Website](https://ollama.com)
+- [Ollama GitHub Repository](https://github.com/ollama/ollama)
+- [Cheshire Cat Website](https://cheshirecat.ai)
+- [Cheshire Cat GitHub Repository](https://github.com/cheshire-cat-ai)
+- [Portainer Website](https://www.portainer.io)
+
+## Contributing
+
+Contributions are welcome! If you have any improvements or suggestions for the Docker Compose files, feel free to open an issue or submit a pull request.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE). Feel free to use, modify, and distribute the Docker Compose files as needed.
+
+---
 
