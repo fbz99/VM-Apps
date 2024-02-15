@@ -9,6 +9,9 @@ Welcome to the Docker Compose repository for running various applications on a V
   - `docker-compose.yml`: Docker Compose file for deploying a single instance each of Llama and Cheshire Cat.
 - **Portainer/**
   - `docker-compose.yml`: Docker Compose file for deploying Portainer to manage all containers on the VM.
+- **Scripts/**
+  - `deploy.sh`: Shell script for deploying containers. Use `-m` flag for multi-instance Cheshire Cat and `-s` flag for a single instance.
+  - `stop.sh`: Shell script for stopping all containers except for Portainer.
 
 ## Usage
 
@@ -22,7 +25,7 @@ Welcome to the Docker Compose repository for running various applications on a V
 1. Clone this repository to your VM:
 
     ```bash
-    git clone https://github.com/your-username/docker-compose-vm.git
+    git clone https://github.com/fbz99/VM-Apps.git
     ```
 
 2. Navigate to the `Ollama-CheshireCat` directory:
@@ -73,4 +76,3 @@ This project is licensed under the [MIT License](LICENSE). Feel free to use, mod
 
 ---
 
-**Note:** Replace `your-username` in the repository URL with your actual GitHub username.
