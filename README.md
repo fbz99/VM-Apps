@@ -47,6 +47,13 @@ Welcome to the Docker Compose repository for running various applications on a V
 
 5. Access the applications using their respective endpoints.
 
+## References
+
+- [Ollama Website](https://ollama.com)
+- [Ollama GitHub Repository](https://github.com/ollama/ollama)
+- [Cheshire Cat Website](https://cheshirecat.ai)
+- [Cheshire Cat GitHub Repository](https://github.com/cheshire-cat-ai)
+
 ## Contributing
 
 Contributions are welcome! If you have any improvements or suggestions for the Docker Compose files, feel free to open an issue or submit a pull request.
