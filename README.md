@@ -1,12 +1,14 @@
 # Docker Compose Files for Running Applications on a VM
 
-Welcome to the Docker Compose repository for running various applications on a Virtual Machine (VM). This repository contains Docker Compose files tailored to deploy instances of the Llama and Cheshire Cat applications. The applications are containerized using Docker for easier deployment and management.
+Welcome to the Docker Compose repository for running various applications on a Virtual Machine (VM). This repository contains Docker Compose files tailored to deploy instances of the Llama and Cheshire Cat applications, along with Portainer for managing containers on the VM. The applications are containerized using Docker for easier deployment and management.
 
 ## Folder Structure
 
 - **Ollama-CheshireCat/**
-  - `docker-compose.yaml`: Docker Compose file for deploying two instances each of Llama and Cheshire Cat with the same memory allocation.
+  - `docker-compose-multi.yaml`: Docker Compose file for deploying two instances each of Llama and Cheshire Cat with the same memory allocation.
   - `docker-compose.yml`: Docker Compose file for deploying a single instance each of Llama and Cheshire Cat.
+- **Portainer/**
+  - `docker-compose.yml`: Docker Compose file for deploying Portainer to manage all containers on the VM.
 
 ## Usage
 
@@ -34,7 +36,7 @@ Welcome to the Docker Compose repository for running various applications on a V
    - For deploying two instances of Llama and Cheshire Cat:
 
         ```bash
-        docker-compose -f docker-compose.yaml up -d
+        docker-compose -f docker-compose-multi.yaml up -d
         ```
 
    - For deploying a single instance of Llama and Cheshire Cat:
@@ -45,7 +47,13 @@ Welcome to the Docker Compose repository for running various applications on a V
 
 4. Wait for Docker to pull the necessary images and deploy the containers.
 
-5. Access the applications using their respective endpoints.
+5. Access the applications using their respective endpoints:
+
+   - Cheshire Cat: [http://localhost:1865](http://localhost:1865)
+   - Ollama: [http://localhost:11434](http://localhost:11434)
+   - Portainer: [http://localhost:9443](http://localhost:9443)
+
+6. Use Portainer to manage all containers on the VM. Access it through [Portainer Website](https://www.portainer.io).
 
 ## References
 
@@ -53,6 +61,7 @@ Welcome to the Docker Compose repository for running various applications on a V
 - [Ollama GitHub Repository](https://github.com/ollama/ollama)
 - [Cheshire Cat Website](https://cheshirecat.ai)
 - [Cheshire Cat GitHub Repository](https://github.com/cheshire-cat-ai)
+- [Portainer Website](https://www.portainer.io)
 
 ## Contributing
 
