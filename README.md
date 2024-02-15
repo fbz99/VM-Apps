@@ -40,6 +40,13 @@
 
 Alternatively, you can use the provided shell scripts to deploy and stop containers:
 
+- **Add Permissions**
+    - Enter the /Scripts folder and use chmod:
+        ```bash
+        cd /Scripts
+        chmod +x *
+        ```
+
 - **Deploy Containers:**
 
     - Run the `deploy.sh` script with the `-m` flag for multi-instance Cheshire Cat and `-s` flag for a single instance. For example:
